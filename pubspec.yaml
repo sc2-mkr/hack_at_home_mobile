@@ -13,7 +13,9 @@ dependencies:
   cupertino_icons: ^0.1.2
   http:
   fluttertoast:
-  flutter_swiper:
+  camera:
+  path_provider:
+  path:
 
 dev_dependencies:
   flutter_test:

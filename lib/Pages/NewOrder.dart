@@ -1,9 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hackathome/Pages/AddNewBasketItem.dart';
 import 'package:hackathome/Pages/BasketItemDetail.dart';
 import 'package:hackathome/Utility/Basket.dart';
-import 'package:hackathome/Utility/BasketItem.dart';
+import 'package:hackathome/Utility/Colorized.dart';
 import 'package:hackathome/Utility/StatusBarCleaner.dart';
 import 'package:hackathome/Utility/Theme.dart';
 import 'package:hackathome/main.dart';
@@ -59,83 +61,97 @@ class NewOrderState extends State<NewOrder> {
     );
   }
 
-  _addItem(){
-    Basket.entries.insert(0,BasketItem(name: "Ciao ${Basket.entries.length}"));
-    setState(() {});
-  }
-
   _removeItem(index){
-    Basket.entries.removeAt(index);
+    Basket.removeEntries(index);
     setState(() {});
   }
 
   // ignore: non_constant_identifier_names
   Page1(int numPage){
-    return Stack(
+    return Column(
       children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.only(top: 8.0),
-          child: ListView.separated(
-            itemCount: Basket.entries.length,
-            separatorBuilder: (context, index) => Divider(
-              color: Colors.grey[700],
-            ),
-            itemBuilder: (BuildContext context, int index) {
-              return Container(
-                height: 50,
-                child: ListTile(
-                  onTap: (){
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => BasketItemDetail(Basket.entries[index])),
-                    );
-                  },
-                  title: Text(Basket.entries[index].getName()),
-                  trailing: InkWell(
-                    onTap: (){_removeItem(index);},
-                    child: Container(
-                      width: 35,
-                      height: 35,
-                      color: Colors.red[700],
-                      child: Icon(Icons.delete,color: Colors.white,),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 8.0),
+            child: ListView.separated(
+              itemCount: Basket.getEntries().length,
+              separatorBuilder: (context, index) => Divider(
+                color: Colors.grey[700],
+              ),
+              itemBuilder: (BuildContext context, int index) {
+                return Container(
+                  height: 50,
+                  child: ListTile(
+                    onTap: (){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => BasketItemDetail(Basket.getEntries()[index])),
+                      );
+                    },
+                    leading: Basket.getEntries()[index].getImagePath()==null ? CircleAvatar(
+                      child: Icon(Icons.shopping_basket,color: SC2Theme.backgroundColor,),
+                      backgroundColor: Colorized().getColor(index),
+                    ):
+                    CircleAvatar(
+                      backgroundImage: FileImage(File(Basket.getEntries()[index].getImagePath())),
+                    ),
+                    title: Text(Basket.getEntries()[index].getName(),style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),),
+                    trailing: InkWell(
+                      onTap: (){_removeItem(index);},
+                      child: Container(
+                        width: 40,
+                        height: 40,
+                        decoration: new BoxDecoration(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          color: Colors.red[700],
+                        ),
+                        child: Icon(Icons.delete,color: Colors.white,),
+                      ),
                     ),
                   ),
+                );
+              },
+            ),
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Stack(
+            children: <Widget>[
+              Container(
+                alignment: Alignment.bottomCenter,
+                child: SizedBox(
+                  height: 50,
+                  child: RaisedButton(
+                    color: SC2Theme.mainColor,
+                    child: Text("AGGIUNGI",style: TextStyle(color: Colors.white, fontSize: 18),),
+                    onPressed: (){
+                      _addAndWait();
+                    },
+                  ),
                 ),
-              );
-            },
+              ),
+              Container(
+                alignment: Alignment.bottomRight,
+                child: FlatButton(
+                  child: Text("AVANTI",style: TextStyle(color: SC2Theme.mainColor, fontSize: 18),),
+                  onPressed: (){_controller.animateToPage(numPage+1, duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,);
+                  },
+                ),
+              ),
+              Container(
+                alignment: Alignment.bottomLeft,
+                child: FlatButton(
+                  child: Text("INDIETRO",style: TextStyle(color: Colors.brown[300], fontSize: 18),),
+                  onPressed: (){_controller.animateToPage(numPage-1, duration: const Duration(milliseconds: 400),
+                    curve: Curves.easeInOut,);
+                  },
+                ),
+              )
+            ],
           ),
         ),
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          alignment: Alignment.bottomCenter,
-          child: RaisedButton(
-            color: SC2Theme.mainColor,
-            child: Text("AGGIUNGI",style: TextStyle(color: Colors.white),),
-            onPressed: (){
-              _addAndWait();
-            },
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          alignment: Alignment.bottomRight,
-          child: FlatButton(
-            child: Text("AVANTI",style: TextStyle(color: SC2Theme.mainColor),),
-            onPressed: (){_controller.animateToPage(numPage+1, duration: const Duration(milliseconds: 400),
-              curve: Curves.easeInOut,);
-            },
-          ),
-        ),
-        Container(
-          padding: const EdgeInsets.all(8.0),
-          alignment: Alignment.bottomLeft,
-          child: FlatButton(
-            child: Text("INDIETRO",style: TextStyle(color: Colors.brown[700]),),
-            onPressed: (){_controller.animateToPage(numPage-1, duration: const Duration(milliseconds: 400),
-              curve: Curves.easeInOut,);
-            },
-          ),
-        )
       ],
     );
   }

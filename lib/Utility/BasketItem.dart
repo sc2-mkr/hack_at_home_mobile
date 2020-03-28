@@ -1,12 +1,26 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 class BasketItem {
-  final String name;
+  String name;
+  String imagePath;
 
-  BasketItem({Key key, this.name});
+  BasketItem({Key key, this.name, this.imagePath});
 
   getName(){
     return this.name;
   }
 
+  setName(String input){
+    name = input;
+  }
+
+  getImagePath(){
+    return imagePath;
+  }
+
+  setImagePath(String input){
+    imagePath = input;
+  }
 }
