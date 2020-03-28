@@ -4,11 +4,13 @@ import 'Pages/Home.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+  final String title = "HackAtHome";
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
+      title: title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
