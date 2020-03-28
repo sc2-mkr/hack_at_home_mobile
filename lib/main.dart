@@ -4,7 +4,7 @@ import 'Pages/Home.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
-  final String title = "HackAtHome";
+  final String title = "Spesa a Casa Tua";
 
   @override
   Widget build(BuildContext context) {

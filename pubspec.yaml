@@ -12,6 +12,8 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   http:
+  fluttertoast:
+  flutter_swiper:
 
 dev_dependencies:
   flutter_test:
