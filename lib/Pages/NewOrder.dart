@@ -5,6 +5,7 @@ import 'package:hackathome/Pages/BasketItemDetail.dart';
 import 'package:hackathome/Utility/Basket.dart';
 import 'package:hackathome/Utility/BasketItem.dart';
 import 'package:hackathome/Utility/StatusBarCleaner.dart';
+import 'package:hackathome/Utility/Theme.dart';
 import 'package:hackathome/main.dart';
 
 class NewOrder extends StatefulWidget {
@@ -24,6 +25,10 @@ class NewOrderState extends State<NewOrder> {
   );
 
   @override
+  void initState(){
+
+  }
+  @override
   void dispose() {
     _controller.dispose();
     super.dispose();
@@ -32,8 +37,9 @@ class NewOrderState extends State<NewOrder> {
   @override
   Widget build(BuildContext context) {
     return StatusBarCleaner(
-        color: Colors.blue[700],
+        color: SC2Theme.darkmainColor,
         child: Scaffold(
+          backgroundColor: SC2Theme.backgroundColor,
           appBar: AppBar(title: Text(MyApp().title),),
           body: returnPageView(),
         )
@@ -67,47 +73,46 @@ class NewOrderState extends State<NewOrder> {
   Page1(int numPage){
     return Stack(
       children: <Widget>[
-        ListView.separated(
-          padding: const EdgeInsets.all(8),
-          itemCount: Basket.entries.length,
-          separatorBuilder: (context, index) => Divider(
-            color: Colors.black,
-          ),
-          itemBuilder: (BuildContext context, int index) {
-            return Container(
-              height: 50,
-              child: ListTile(
-                onTap: (){
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => BasketItemDetail(Basket.entries[index])),
-                  );
-                },
-                title: Text(Basket.entries[index].getName()),
-                trailing: InkWell(
-                  onTap: (){_removeItem(index);},
-                  child: Container(
-                    width: 40,
-                    height: 40,
-                    color: Colors.red,
-                    child: Icon(Icons.delete,color: Colors.white,),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: ListView.separated(
+            itemCount: Basket.entries.length,
+            separatorBuilder: (context, index) => Divider(
+              color: Colors.grey[700],
+            ),
+            itemBuilder: (BuildContext context, int index) {
+              return Container(
+                height: 50,
+                child: ListTile(
+                  onTap: (){
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => BasketItemDetail(Basket.entries[index])),
+                    );
+                  },
+                  title: Text(Basket.entries[index].getName()),
+                  trailing: InkWell(
+                    onTap: (){_removeItem(index);},
+                    child: Container(
+                      width: 35,
+                      height: 35,
+                      color: Colors.red[700],
+                      child: Icon(Icons.delete,color: Colors.white,),
+                    ),
                   ),
                 ),
-              ),
-            );
-          },
+              );
+            },
+          ),
         ),
         Container(
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.bottomCenter,
           child: RaisedButton(
-            color: Colors.blue,
+            color: SC2Theme.mainColor,
             child: Text("AGGIUNGI",style: TextStyle(color: Colors.white),),
             onPressed: (){
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => AddNewBasketItem()),
-              );
+              _addAndWait();
             },
           ),
         ),
@@ -115,7 +120,7 @@ class NewOrderState extends State<NewOrder> {
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.bottomRight,
           child: FlatButton(
-            child: Text("AVANTI",style: TextStyle(color: Colors.blue),),
+            child: Text("AVANTI",style: TextStyle(color: SC2Theme.mainColor),),
             onPressed: (){_controller.animateToPage(numPage+1, duration: const Duration(milliseconds: 400),
               curve: Curves.easeInOut,);
             },
@@ -125,7 +130,7 @@ class NewOrderState extends State<NewOrder> {
           padding: const EdgeInsets.all(8.0),
           alignment: Alignment.bottomLeft,
           child: FlatButton(
-            child: Text("INDIETRO",style: TextStyle(color: Colors.grey[500]),),
+            child: Text("INDIETRO",style: TextStyle(color: Colors.brown[700]),),
             onPressed: (){_controller.animateToPage(numPage-1, duration: const Duration(milliseconds: 400),
               curve: Curves.easeInOut,);
             },
@@ -133,5 +138,17 @@ class NewOrderState extends State<NewOrder> {
         )
       ],
     );
+  }
+
+  _addAndWait() async{
+    await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => AddNewBasketItem()),
+    ).then((value){
+      if(value=="OK"){
+        setState(() {});
+      }
+    });
+
   }
 }

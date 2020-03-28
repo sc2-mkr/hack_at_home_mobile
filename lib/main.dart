@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathome/Utility/Theme.dart';
 import 'Pages/Home.dart';
 
 void main() => runApp(MyApp());
@@ -12,7 +13,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: title,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.brown,
+        backgroundColor: SC2Theme.backgroundColor
       ),
       home: Home(),
     );

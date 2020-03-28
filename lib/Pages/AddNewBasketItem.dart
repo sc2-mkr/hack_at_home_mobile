@@ -5,6 +5,7 @@ import 'package:hackathome/Utility/Basket.dart';
 import 'package:hackathome/Utility/BasketItem.dart';
 import 'package:hackathome/Utility/Drawer.dart';
 import 'package:hackathome/Utility/StatusBarCleaner.dart';
+import 'package:hackathome/Utility/Theme.dart';
 
 import '../main.dart';
 
@@ -20,8 +21,9 @@ class AddNewBasketItemState extends State<AddNewBasketItem> {
   @override
   Widget build(BuildContext context) {
     return StatusBarCleaner(
-        color: Colors.blue[700],
+        color: SC2Theme.darkmainColor,
         child: Scaffold(
+          backgroundColor: SC2Theme.backgroundColor,
           appBar: AppBar(title: Text(MyApp().title),),
           drawer: getDrawer(),
           body: getBody(),
@@ -46,13 +48,10 @@ class AddNewBasketItemState extends State<AddNewBasketItem> {
         RaisedButton(
           textColor: Colors.white,
           child: Text("AGGIUNGI"),
-          color: Colors.blue,
+          color: SC2Theme.mainColor,
           onPressed: (){
             Basket.entries.insert(0,BasketItem(name: name));
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(builder: (context) => NewOrder()),
-            );
+            Navigator.pop(context,"OK");
           },
         )
       ],
