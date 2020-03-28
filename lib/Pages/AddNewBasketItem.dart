@@ -61,20 +61,21 @@ class AddNewBasketItemState extends State<AddNewBasketItem> {
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: Text("se vuoi essere più chiaro \n scatta una foto",
+                child: Text("se vuoi per maggiore chiarezza \n scatta una foto",
                     style: TextStyle(fontSize: 20,), textAlign: TextAlign.center),
               ),
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: SizedBox(
-                  width: 170,
-                  height: 170,
+                  width: 200,
+                  height: 200,
                   child: InkWell(
                     onTap: () {
                       _asyncCamera(context);
                     },
                     child: path != null ? CircleAvatar(
                       backgroundImage: FileImage(File(path)),
+                      child: Icon(Icons.camera_alt, size: 60,),
                     ) :
                     CircleAvatar(
                       backgroundColor: SC2Theme.mainColor,
