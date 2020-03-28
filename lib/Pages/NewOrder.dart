@@ -7,6 +7,7 @@ import 'package:hackathome/Pages/AddNewBasketItem.dart';
 import 'package:hackathome/Pages/BasketItemDetail.dart';
 import 'package:hackathome/Utility/Basket.dart';
 import 'package:hackathome/Utility/Colorized.dart';
+import 'package:hackathome/Utility/SendBasketToServer.dart';
 import 'package:hackathome/Utility/StatusBarCleaner.dart';
 import 'package:hackathome/Utility/Theme.dart';
 import 'package:hackathome/main.dart';
@@ -354,7 +355,9 @@ class NewOrderState extends State<NewOrder> {
                   color: SC2Theme.mainColor,
                   textColor: Colors.white,
                   child: Text("FINITO",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
-                  onPressed: (){},
+                  onPressed: (){
+                    _sendDataToServer();
+                  },
                 ),
               ),
             )
@@ -379,6 +382,12 @@ class NewOrderState extends State<NewOrder> {
     );
   }
 
+  _sendDataToServer() async {
+      int result = await SendBasketToServer.send();
+      if(result==0){
+        Navigator.pop(context);
+      }
+  }
   _addAndWait() async{
     await Navigator.push(
       context,
