@@ -26,60 +26,67 @@ class ShippingListDetailState extends State<ShippingListDetail> {
         color: SC2Theme.darkmainColor,
         child: Scaffold(
           backgroundColor: SC2Theme.backgroundColor,
-          appBar: AppBar(title: Text(MyApp().title),),
+          appBar: AppBar(
+            title: Text(MyApp().title),
+          ),
           drawer: getDrawer(),
           body: getBody(),
-        )
-    );
+        ));
   }
 
-  getBody(){
+  getBody() {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.only(top: 32.0, left: 32,right: 32,bottom: 16),
-          child: Center(child: Text(widget.basket.getUserName(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
+          padding: const EdgeInsets.all(32.0),
+          child: Center(
+              child: Text(
+            widget.basket.getUserName(),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          )),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 8.0,left: 32,right: 32),
-          child: Center(child: Text(widget.basket.getAddress(),style: TextStyle(fontSize: 16))),
-        ),
-        Padding(
-          padding: const EdgeInsets.only(bottom: 16.0,left: 32,right: 32),
-          child: Center(child: Text(widget.basket.getCity(),style: TextStyle(fontSize: 14))),
+          padding: const EdgeInsets.only(bottom: 16.0, left: 32, right: 32),
+          child: Center(
+              child: Text(widget.basket.getAddress(),
+                  style: TextStyle(fontSize: 16))),
         ),
         RaisedButton(
-          child:Text("ACCETTA"),
-          onPressed: (){
-            AcceptJob.accept(widget.basket.getListID(),2);
+          child: Text("ACCETTA"),
+          onPressed: () {
+            AcceptJob.accept(widget.basket.getListID(), 2);
           },
         ),
         Expanded(
           child: ListView.builder(
               itemCount: widget.basket.getEntries().length,
-              itemBuilder: (context, index){
+              itemBuilder: (context, index) {
                 NetworkImage image = null;
-                try{
-                  image = NetworkImage("http://79.37.45.118:8080${widget.basket.getEntries()[index].getImagePath()}");
-                }catch(e){
+                try {
+                  String imageUrl =
+                      widget.basket.getEntries()[index].getImagePath();
+                  if (imageUrl != null)
+                    image = NetworkImage("http://79.37.45.118:8080${imageUrl}");
+                } catch (e) {
                   image = null;
                 }
 
                 return ListTile(
                   leading: CircleAvatar(
-                    backgroundImage: image!=null?image:null,
-                    child: image==null?Icon(Icons.shopping_basket):null,
+                    backgroundImage: image != null ? image : null,
+                    child: image == null ? Icon(Icons.shopping_basket) : null,
                   ),
                   title: Text("${widget.basket.getEntries()[index].getName()}"),
-                  onTap: (){
+                  onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ListItemDetail(widget.basket.getEntries()[index])),
+                      MaterialPageRoute(
+                          builder: (context) => ListItemDetail(
+                              widget.basket.getEntries()[index])),
                     );
                   },
                 );
-              }
-          ),
+              }),
         ),
       ],
     );
