@@ -6,6 +6,7 @@ class Basket{
   static String userName = "";
   static String address = "";
   static String phoneNumber = "";
+  static String city ="La Mia";
 
   static getEntries(){
     return entries;
@@ -18,6 +19,10 @@ class Basket{
   }
   static getPhoneNumber(){
     return phoneNumber;
+  }
+
+  static getCity(){
+    return city;
   }
 
   static removeEntries(int index){
@@ -38,5 +43,9 @@ class Basket{
 
   static setPhoneNumber(input){
     phoneNumber = input;
+  }
+
+  static setCity(input){
+    city = input;
   }
 }

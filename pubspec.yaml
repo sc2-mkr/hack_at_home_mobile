@@ -16,6 +16,8 @@ dependencies:
   camera:
   path_provider:
   path:
+  dio:
+  flutter_rounded_progress_bar:
 
 dev_dependencies:
   flutter_test:

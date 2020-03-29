@@ -160,46 +160,48 @@ class NewOrderState extends State<NewOrder> {
   MoreInformation(){
     return Stack(
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Center(child: Text("Ci servono ancora alcune informazioni",style: TextStyle(fontSize: 20),)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, right: 32.0, left:32.0),
-              child: Center(
-                child: Text("Come ad esempio il tuo",
-                style: TextStyle(fontSize: 20),textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 32.0, left:32.0),
-              child: Center(
-                child: Text("Numero telefonico",
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0, right: 32.0, left:32.0),
-              child: Center(
-                child: Text("In modo che chi prenderà in consegna la tua richiesta possa contattarti",
-                style: TextStyle(fontSize: 20),textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  WhitelistingTextInputFormatter.digitsOnly
-                ],
-                onChanged: (text) {
-                  Basket.setPhoneNumber(text);
-                },
-                decoration: InputDecoration(
-                    hintText: 'Numero di Telefono'
+        SingleChildScrollView( 
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Center(child: Text("Ci servono ancora alcune informazioni",style: TextStyle(fontSize: 20),)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, right: 32.0, left:32.0),
+                child: Center(
+                  child: Text("Come ad esempio il tuo",
+                  style: TextStyle(fontSize: 20),textAlign: TextAlign.center,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 32.0, left:32.0),
+                child: Center(
+                  child: Text("Numero telefonico",
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),textAlign: TextAlign.center,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0, right: 32.0, left:32.0),
+                child: Center(
+                  child: Text("In modo che chi prenderà in consegna la tua richiesta possa contattarti",
+                  style: TextStyle(fontSize: 20),textAlign: TextAlign.center,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: TextField(
+                  keyboardType: TextInputType.number,
+                  inputFormatters: <TextInputFormatter>[
+                    WhitelistingTextInputFormatter.digitsOnly
+                  ],
+                  onChanged: (text) {
+                    Basket.setPhoneNumber(text);
+                  },
+                  decoration: InputDecoration(
+                      hintText: 'Numero di Telefono'
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -236,63 +238,57 @@ class NewOrderState extends State<NewOrder> {
   NameAndAddress(){
     return Stack(
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, right: 32.0, left: 32.0),
-              child: Center(child: Text("Per ultimo",style: TextStyle(fontSize: 20),)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 32.0, left: 32.0),
-              child: Center(child: Text("Ci servirebbe il tuo",style: TextStyle(fontSize: 20),)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom: 16.0, right: 32.0, left: 32.0),
-              child: Center(child: Text("Nome e Cognome",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  WhitelistingTextInputFormatter.digitsOnly
-                ],
-                onChanged: (text) {
-                  Basket.setUserName(text);
-                },
-                decoration: InputDecoration(
-                    hintText: 'Nome e Cognome'
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, right: 32.0, left: 32.0),
+                child: Center(child: Text("Per ultimo",style: TextStyle(fontSize: 20),)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 32.0, left: 32.0),
+                child: Center(child: Text("Ci servirebbe il tuo",style: TextStyle(fontSize: 20),)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 16.0, right: 32.0, left: 32.0),
+                child: Center(child: Text("Nome e Cognome",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: TextField(
+                  onChanged: (text) {
+                    Basket.setUserName(text);
+                  },
+                  decoration: InputDecoration(
+                      hintText: 'Nome e Cognome'
+                  ),
                 ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top:16, right: 32.0, left: 32.0),
-              child: Center(child: Text("e il tuo",style: TextStyle(fontSize: 20),)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 32.0, left: 32.0),
-              child: Center(child: Text("Indirizzo Civico",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(bottom:16, right: 32.0, left: 32.0),
-              child: Center(child: Text("in modo che ti possano portare la spesa a casa",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: TextField(
-                keyboardType: TextInputType.number,
-                inputFormatters: <TextInputFormatter>[
-                  WhitelistingTextInputFormatter.digitsOnly
-                ],
-                onChanged: (text) {
-                  Basket.setAddress(text);
-                },
-                decoration: InputDecoration(
-                    hintText: 'Indirizzo Civico'
+              Padding(
+                padding: const EdgeInsets.only(top:16, right: 32.0, left: 32.0),
+                child: Center(child: Text("e il tuo",style: TextStyle(fontSize: 20),)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 32.0, left: 32.0),
+                child: Center(child: Text("Indirizzo Civico",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(bottom:16, right: 32.0, left: 32.0),
+                child: Center(child: Text("in modo che ti possano portare la spesa a casa",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: TextField(
+                  onChanged: (text) {
+                    Basket.setAddress(text);
+                  },
+                  decoration: InputDecoration(
+                      hintText: 'Indirizzo Civico'
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
         Align(
           alignment: Alignment.bottomCenter,
@@ -329,39 +325,41 @@ class NewOrderState extends State<NewOrder> {
   Final(){
     return Stack(
       children: <Widget>[
-        Column(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0, right: 32.0, left: 32.0),
-              child: Center(child: Text("Abbiamo finito!!!",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 32.0, left: 32.0),
-              child: Center(child: Text("Premi il pulsante",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 32.0, left: 32.0),
-              child: Center(child: Text("Finito",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(right: 32.0, left: 32.0),
-              child: Center(child: Text("Per inviare la tua richiesta",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(32.0),
-              child: SizedBox(
-                height: 50,
-                child: RaisedButton(
-                  color: SC2Theme.mainColor,
-                  textColor: Colors.white,
-                  child: Text("FINITO",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
-                  onPressed: (){
-                    _sendDataToServer();
-                  },
-                ),
+        SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0, right: 32.0, left: 32.0),
+                child: Center(child: Text("Abbiamo finito!!!",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
               ),
-            )
-          ],
+              Padding(
+                padding: const EdgeInsets.only(right: 32.0, left: 32.0),
+                child: Center(child: Text("Premi il pulsante",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 32.0, left: 32.0),
+                child: Center(child: Text("Finito",style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold), textAlign: TextAlign.center,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 32.0, left: 32.0),
+                child: Center(child: Text("Per inviare la tua richiesta",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,)),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: SizedBox(
+                  height: 50,
+                  child: RaisedButton(
+                    color: SC2Theme.mainColor,
+                    textColor: Colors.white,
+                    child: Text("FINITO",style: TextStyle(fontSize: 20), textAlign: TextAlign.center,),
+                    onPressed: (){
+                      _sendDataToServer();
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
         Align(
           alignment: Alignment.bottomLeft,
