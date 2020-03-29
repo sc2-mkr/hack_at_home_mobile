@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hackathome/Pages/About.dart';
 import 'package:hackathome/Pages/Home.dart';
 
 // ignore: camel_case_types
@@ -54,6 +55,12 @@ class getDrawerState extends State<getDrawer>{
           ListTile(
             leading: Icon(Icons.group),
             title: Text('About'),
+            onTap: (){
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => About()),
+              );
+            },
           ),
         ],
       ),
