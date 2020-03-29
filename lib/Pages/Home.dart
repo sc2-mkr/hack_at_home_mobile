@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:hackathome/Pages/NewOrder.dart';
+import 'package:hackathome/Pages/ShippingList.dart';
 import 'package:hackathome/Utility/Drawer.dart';
 import 'package:hackathome/Utility/StatusBarCleaner.dart';
 import 'package:hackathome/Utility/Theme.dart';
@@ -81,9 +82,9 @@ class HomeState extends State<Home> {
                       style: TextStyle(fontSize: 34, color: Colors.white),)),
                   ),
                   onTap: () {
-                    Fluttertoast.showToast(
-                      msg: "Fai il login per accedere",
-                      toastLength: Toast.LENGTH_LONG,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ShippingList()),
                     );
                   },
                 ),

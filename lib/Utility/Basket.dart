@@ -6,7 +6,16 @@ class Basket{
   static String userName = "";
   static String address = "";
   static String phoneNumber = "";
-  static String city ="La Mia";
+  static String city ="";
+
+  static clean(){
+    entries = [];
+    userID = "";
+    userName = "";
+    address = "";
+    phoneNumber = "";
+    city ="";
+  }
 
   static getEntries(){
     return entries;

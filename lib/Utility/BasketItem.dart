@@ -8,7 +8,7 @@ class BasketItem {
 
   BasketItem({Key key, this.name, this.imagePath});
 
-  getName(){
+  String getName(){
     return this.name;
   }
 

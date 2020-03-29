@@ -6,8 +6,9 @@ class SendBasketToServer{
 
   static send() async {
     var dio = Dio();
-    String Url = "http://79.37.45.118:8080/shippinglists?city=${Uri.encodeComponent(Basket.getCity())}&address=${Uri.encodeComponent(Basket.getAddress())}";
-    Response response = await dio.post(Url);
+    
+    String Url = "http://79.37.45.118:8080/shippinglists";
+    Response response = await dio.post(Url,data: {"address": Basket.getAddress(),"city": Basket.getCity()});
 
     print(response.statusCode);
     if(response.statusCode==200) {
@@ -20,13 +21,13 @@ class SendBasketToServer{
         });
 
         Response response = await dio.post(
-          "http://79.37.45.118:8080/shippinglists/$newId/items",
+          "http://79.37.45.118:8080/shippinglists/$newId/items?text=${Uri.encodeComponent(element.getName())}",
           data: formData,
           onSendProgress: (int sent, int total) {
             print("$sent/$total");
           },
         );
-        print(response);
+        Basket.clean();
       }
     }
   }
