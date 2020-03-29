@@ -7,6 +7,7 @@ class Basket{
   static String address = "";
   static String phoneNumber = "";
   static String city ="";
+  static String listID = "";
 
   static clean(){
     entries = [];

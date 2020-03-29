@@ -47,7 +47,7 @@ class ShippingListState extends State<ShippingList> {
                   onTap: (){
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => ShippingListDetail(basket: snapshot.data[index].getEntries())),
+                      MaterialPageRoute(builder: (context) => ShippingListDetail(basket: snapshot.data[index])),
                     );
                   },
                 );

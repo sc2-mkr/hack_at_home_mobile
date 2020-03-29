@@ -7,6 +7,16 @@ class variableBasket{
   String address = "ciao";
   String phoneNumber = "";
   String city ="";
+  String listID ="";
+
+
+  getListID(){
+    return listID;
+  }
+
+  setListID(input){
+    listID = input;
+  }
 
   List<BasketItem> getEntries(){
     return entries;

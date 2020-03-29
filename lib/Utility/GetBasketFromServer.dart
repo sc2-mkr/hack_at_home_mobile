@@ -27,6 +27,7 @@ class GetBasketFromServer{
           }else{
             newBasket.setCity("città non inserita");
           }
+          newBasket.setListID(item["id"].toString());
           if(item["shippingItems"]!=null){
             for (var article in item["shippingItems"]){
               newBasket.addEntries(BasketItem(name: article["text"],imagePath: article["photoUrl"]));
