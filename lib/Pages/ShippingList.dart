@@ -43,7 +43,7 @@ class ShippingListState extends State<ShippingList> {
                 return ListTile(
                   leading: CircleAvatar(),
                   title: Text(snapshot.data[index].getUserName()),
-                  subtitle: Text(snapshot.data[index].getAddress()),
+                  subtitle: Text("${snapshot.data[index].getAddress()} - ${snapshot.data[index].getCity()}"),
                   onTap: (){
                     Navigator.push(
                       context,

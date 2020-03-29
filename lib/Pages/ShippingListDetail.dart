@@ -37,12 +37,16 @@ class ShippingListDetailState extends State<ShippingListDetail> {
     return Column(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(32.0),
+          padding: const EdgeInsets.only(top: 32.0, left: 32,right: 32,bottom: 16),
           child: Center(child: Text(widget.basket.getUserName(),style: TextStyle(fontSize: 20,fontWeight: FontWeight.bold),)),
         ),
         Padding(
-          padding: const EdgeInsets.only(bottom: 16.0,left: 32,right: 32),
+          padding: const EdgeInsets.only(bottom: 8.0,left: 32,right: 32),
           child: Center(child: Text(widget.basket.getAddress(),style: TextStyle(fontSize: 16))),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16.0,left: 32,right: 32),
+          child: Center(child: Text(widget.basket.getCity(),style: TextStyle(fontSize: 14))),
         ),
         RaisedButton(
           child:Text("ACCETTA"),
